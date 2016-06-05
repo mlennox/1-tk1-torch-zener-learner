@@ -31,5 +31,9 @@ It is likely I will add more starting data to the examples, but for now these wi
 After a cursory search I couldn't find any tools that would help me generate extra data from an existing data set. The first part of this project will require the creation of some Python scripts to fold, spindle and mutilate the starting data set.
 
 ## Data format
-I will dicover what the data format should be as I progress in building out this network. I'll update this section as I know more.
+I will discover what the data format should be as I progress in building out this network. I'll update this section as I know more.
+
+## Metrics
+While training the network it will be imperative to know how the training is going - does the learning rate need tweaking? Is the network overfitting? Is it training quickly enough?
+To measure the validaity of choices for the network parameters, I'll need to hold aside some of the data to use as a validation set to evaluate different learning rates etc.
 
