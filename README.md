@@ -15,6 +15,9 @@ We will attempt to generate a large data set starting only with the symbols take
 To achieve this I will use Python to distort, scale and transpose the initial data.
 It is likely I will add more starting data to the examples, but for now these will suffice as it is a simple neural net the risk of over-fitting is somewhat lower.
 
+### Prerequisites
+You will need to have Python 2.7 installed. Earlier versions *may* work, but that is what I have installed, so. Also you'll need to install [Pillow](https://pillow.readthedocs.io/en/3.0.0/installation.html) for loading and mucking about with image files.
+
 ## The symbols
 
 ![Circle](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/circle.png)
@@ -36,4 +39,6 @@ I will discover what the data format should be as I progress in building out thi
 ## Metrics
 While training the network it will be imperative to know how the training is going - does the learning rate need tweaking? Is the network overfitting? Is it training quickly enough?
 To measure the validaity of choices for the network parameters, I'll need to hold aside some of the data to use as a validation set to evaluate different learning rates etc.
+
+
 
