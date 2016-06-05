@@ -13,6 +13,19 @@ import numpy
 import random
 import os
 
+
+def fetch_symbol_images():
+	symbols_images = []
+	source_image_path = "../zener-images"
+
+	for root, dirs, files in os.walk(source_image_path):
+		for f in files:
+			if f.endswith(".png"):
+				image = Image.open(source_image_path + "/" + f)
+				symbols_image_files.append(image)
+
+	return symbols_image_files
+
 # https://github.com/nathancahill/snippets/blob/master/image_perspective.py
 # pa - starting points
 # pb - ending points
@@ -64,4 +77,5 @@ def initial_image():
 	draw = ImageDraw.Draw(image)
 
 	return image
+
 
