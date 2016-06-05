@@ -3,7 +3,7 @@ Simple neural net to classify zener cards
 ## Zener cards?
 In the 1930s psychologist Karl Zener designed a set of five cards to be used in experiments conducted with paraphyschologist Joseph Rhine.
 
-![Zener Cards Image - Circle, Cross, Wavy Lines, Square, Star], via Wikimedia Commons](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/Zener_cards_color.svg.png) - By Mikhail Ryazanov (talk) 01:30, 1 April 2014 (UTC) (File:Cartas Zener.svg + File:Zenerkarten c.jpg) [GFDL (http://www.gnu.org/copyleft/fdl.html) or CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/)
+![Zener Cards Image - Circle, Cross, Wavy Lines, Square, Star](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/Zener_cards_color.svg.png) - By Mikhail Ryazanov (talk) 01:30, 1 April 2014 (UTC) (File:Cartas Zener.svg + File:Zenerkarten c.jpg) [GFDL (http://www.gnu.org/copyleft/fdl.html) or CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/), via Wikimedia Commons]
 
 The experimenter would choose a card from a pack of 25, which contained five sets of the five cards shown in the image above - Circle, Cross, Wavy Lines, Square and Star. If the experimental subject guessed correctly more than 20% of the time then it could be possible that they are endowed with supernatural abilities. Or not, the experiments never conclusivel proved ESP.
 
