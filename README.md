@@ -17,15 +17,15 @@ It is likely I will add more starting data to the examples, but for now these wi
 
 ## The symbols
 
-[https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/circle.png]
+![https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/circle.png]
 
-[https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/cross.png]
+![https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/cross.png]
 
-[https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/wavy.png]
+![https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/wavy.png]
 
-[https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/square.png]
+![https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/square.png]
 
-[https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/star.png]
+![https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/star.png]
 
 ## Data expansion
 After a cursory search I couldn't find any tools that would help me generate extra data from an existing data set. The first part of this project will require the creation of some Python scripts to fold, spindle and mutilate the starting data set.
