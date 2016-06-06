@@ -10,21 +10,23 @@
 from PIL import Image
 from PIL import ImageDraw
 import numpy
-import random
 import os
+import random
+import string
 
 
 def fetch_symbol_images():
-	symbols_images = []
+	symbols_images = {}
 	source_image_path = "../zener-images"
 
 	for root, dirs, files in os.walk(source_image_path):
 		for f in files:
 			if f.endswith(".png"):
+				image_name = string.split(f, ".")
 				image = Image.open(source_image_path + "/" + f)
-				symbols_image_files.append(image)
+				symbols_images[image_name[0]] = image
 
-	return symbols_image_files
+	return symbols_images
 
 # https://github.com/nathancahill/snippets/blob/master/image_perspective.py
 # pa - starting points
@@ -43,7 +45,7 @@ def find_coeffs(pa, pb):
     res = numpy.dot(numpy.linalg.inv(A.T * A) * A.T, B)
     return numpy.array(res).reshape(8)
 
-def generate_random_shifts(img_size):
+def generate_random_shifts(img_size, size_factor):
 	w = img_size[0] / size_factor
 	h = img_size[1] / size_factor
 	shifts = []
@@ -55,11 +57,11 @@ def generate_random_shifts(img_size):
 
 
 # create random perspective
-def create_perspective(img):
+def create_perspective(img, size_factor):
 	img_size=img.size
 	w = img_size[0]
 	h = img_size[1]
-	shifts = generate_random_shifts(img_size)
+	shifts = generate_random_shifts(img_size, size_factor)
 	coeffs = find_coeffs(
 		[(shifts[0][0],shifts[0][1]),
 		(w + shifts[1][0],shifts[1][1]),
@@ -77,5 +79,22 @@ def initial_image():
 	draw = ImageDraw.Draw(image)
 
 	return image
+
+
+images = fetch_symbol_images()
+print images
+
+for symbol_name in images:
+	symbol_img = images[symbol_name]
+	for variant in range(1,10):
+		deformed_image = create_perspective(symbol_img, 30)
+		generated_folder = '../generated/' + symbol_name + "/"
+		if not os.path.exists(generated_folder):
+			os.makedirs(generated_folder)
+		deformed_image.save(generated_folder + symbol_name + str(variant) + ".png")
+
+
+
+
 
 
