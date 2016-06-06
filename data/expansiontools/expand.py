@@ -118,7 +118,6 @@ def crop_resize(img, dimension):
 	inv_img = ImageOps.invert(img.convert("RGB"))
 	# returns left, upper, right, lower
 	left, upper, right, lower = inv_img.getbbox()
-	print inv_img.getbbox()
 	width = right - left
 	height = lower - upper
 	if width > height:
@@ -154,7 +153,7 @@ def distort_image(img, factor, rotation, dimension):
 # 1 >= factor <= 5 - slight distortion
 # 5 >= factor <= 30 - large but usable distortion
 # factor > 30 = very large distortion
-perspective_factor = 20
+perspective_factor = 60
 size_factor = 100.0 * (1.0 / perspective_factor)
 
 # specify maximum rotation in degrees

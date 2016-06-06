@@ -26,11 +26,11 @@ After a cursory search I couldn't find any tools that would help me generate ext
 #### The symbols after distortion
 Below you can see an example of what the data expansion script generates. I think these look pretty good for a start. The script currently applies a perspective distortion and then rotates the image. I may add some other type of distortion - pincushion, skew or whatever, but we'll see what the training evaluation tells us.
 
-![Circle](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/circle3.png)  
-![Cross](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/cross8.png)
-![Wavy](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/wavy8.png)
-![Square](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/square5.png)
-![Star](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/star7.png)
+![Circle](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/circle7.png)
+![Cross](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/cross1.png)
+![Wavy](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/wavy9.png)
+![Square](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/square6.png)
+![Star](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/star8.png)
 
 ### Data format
 I will discover what the data format should be as I progress in building out this network. I'll update this section as I know more.
