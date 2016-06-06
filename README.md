@@ -14,18 +14,6 @@ I hope the parallel with machine learning classification is obvious and in this 
 ### Prerequisites
 You will need to have Python 2.7 installed. Earlier versions *may* work, but that is what I have installed, so. Also you'll need to install [Pillow](https://pillow.readthedocs.io/en/3.0.0/installation.html) for loading and mucking about with image files.
 
-## The symbols
-
-![Circle](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/circle.png)
-
-![Cross](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/cross.png)
-
-![Wavy](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/wavy.png)
-
-![Square](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/square.png)
-
-![Star](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/data/zener-images/star.png)
-
 ## Test data
 We will attempt to generate a large data set starting only with the symbols taken from the image above.
 To achieve this I will use Python to distort, scale and transpose the initial data.
@@ -33,6 +21,20 @@ It is likely I will add more starting data to the examples, but for now these wi
 
 ### Data expansion
 After a cursory search I couldn't find any tools that would help me generate extra data from an existing data set. The first part of this project will require the creation of some Python scripts to fold, spindle and mutilate the starting data set.
+
+#### The symbols after distortion
+Below you can see an example of what the data expansion script generates. I think these look pretty good for a start. The script currently applies a perspective distortion and then rotates the image. I may add some other type of distortion - pincushion, skew or whatever, but we'll see what the training evaluation tells us.
+
+![Circle](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/circle3.png)
+
+![Cross](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/cross8.png)
+
+![Wavy](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/wavy8.png)
+
+![Square](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/square5.png)
+
+![Star](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/star7.png)
+
 
 ### Data format
 I will discover what the data format should be as I progress in building out this network. I'll update this section as I know more.
