@@ -83,13 +83,18 @@ def adjust_canvas(img, size_factor):
 	return new_canvas
 
 
+# will randomly rotate the image
 
-# def initial_image():
-# 	image = Image.new("RGB", (w + w_shift,h + h_shift), bg_color)
-# 	draw = ImageDraw.Draw(image)
-
-# 	return image
-
+def rotate_image(img, rotation_range):
+	# we want to have random rotations but my feeling is 
+	# we should have more smaller rotations than larger
+	# this skews the random numbers toward zero
+	rotation_factor = math.pow(random.uniform(0.0,1.0), 4)
+	# we want to rotate either way
+	rotation_direction = (1,-1)[random.random() > 0.5]
+	rotation_angle = int(math.floor(rotation_range * rotation_factor * rotation_direction))
+	return img.rotate(rotation_angle)
+	
 
 # determines how much perspective distortion to use
 # factor <= 1 - no distortion
@@ -98,14 +103,19 @@ def adjust_canvas(img, size_factor):
 # factor > 30 = very large distortion
 perspective_factor = 20
 size_factor = 100.0 * (1.0 / perspective_factor)
-images = fetch_symbol_images()
 
+# specify maximum rotation in degrees
+rotation_range = 45
+
+# load the images
+images = fetch_symbol_images()
 
 for symbol_name in images:
 	symbol_img = images[symbol_name]
 	adjusted_img = adjust_canvas(symbol_img, size_factor)
 	for variant in range(1,10):
 		deformed_image = create_perspective(adjusted_img, size_factor)
+		deformed_image = rotate_image(deformed_image, rotation_range)
 		generated_folder = '../generated/' + symbol_name + "/"
 		if not os.path.exists(generated_folder):
 			os.makedirs(generated_folder)
