@@ -9,6 +9,7 @@
 
 from PIL import Image
 from PIL import ImageDraw
+import math
 import numpy
 import os
 import random
@@ -57,7 +58,7 @@ def generate_random_shifts(img_size, size_factor):
 
 
 # create random perspective
-def create_perspective(img, size_factor):
+def create_perspective(img, factor):
 	img_size=img.size
 	w = img_size[0]
 	h = img_size[1]
@@ -71,23 +72,40 @@ def create_perspective(img, size_factor):
 	return img.transform((w,h), Image.PERSPECTIVE, coeffs, Image.BICUBIC)
 
 
+# will adjust the canvas so that perspective transforms will not result in the image being cropped
+# assumes the image background is white...
+def adjust_canvas(img, size_factor):
+	width, height = img.size
+	canvas_size = (int(math.floor(width + 2 * (width / size_factor))), int(math.floor(height + 2 * (height / size_factor))))
+	img_pos = (int(math.floor((canvas_size[0] - width)/2)), int(math.floor((canvas_size[1] - height)/2)))
+	new_canvas = Image.new("RGBA", canvas_size, (255,255,255,0))
+	new_canvas.paste(img, (img_pos[0], img_pos[1], img_pos[0] + width, img_pos[1] + height))
+	return new_canvas
 
-def initial_image():
-	image = Image.new("RGB", (w + w_shift,h + h_shift), bg_color)
-	# we will choose this font randomly too
-	# font = ImageFont.truetype(font_file, 16)
-	draw = ImageDraw.Draw(image)
-
-	return image
 
 
+# def initial_image():
+# 	image = Image.new("RGB", (w + w_shift,h + h_shift), bg_color)
+# 	draw = ImageDraw.Draw(image)
+
+# 	return image
+
+
+# determines how much perspective distortion to use
+# factor <= 1 - no distortion
+# 1 >= factor <= 5 - slight distortion
+# 5 >= factor <= 30 - large but usable distortion
+# factor > 30 = very large distortion
+perspective_factor = 20
+size_factor = 100.0 * (1.0 / perspective_factor)
 images = fetch_symbol_images()
-print images
+
 
 for symbol_name in images:
 	symbol_img = images[symbol_name]
+	adjusted_img = adjust_canvas(symbol_img, size_factor)
 	for variant in range(1,10):
-		deformed_image = create_perspective(symbol_img, 30)
+		deformed_image = create_perspective(adjusted_img, size_factor)
 		generated_folder = '../generated/' + symbol_name + "/"
 		if not os.path.exists(generated_folder):
 			os.makedirs(generated_folder)
