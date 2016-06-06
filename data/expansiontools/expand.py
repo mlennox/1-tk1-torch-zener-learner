@@ -10,8 +10,8 @@
 # to generate the final training data from that
 
 from PIL import Image
-from PIL import ImageColor
 from PIL import ImageDraw
+from PIL import ImageOps
 import getopt
 import math
 import numpy
@@ -115,8 +115,10 @@ def rotate_image(img, rotation):
 # crop the image to a square that bounds the image using largest bounding-box dimension
 # and then resize the image to the size desired for the neural net training
 def crop_resize(img, dimension):
+	inv_img = ImageOps.invert(img.convert("RGB"))
 	# returns left, upper, right, lower
-	left, upper, right, lower = img.getbbox()
+	left, upper, right, lower = inv_img.getbbox()
+	print inv_img.getbbox()
 	width = right - left
 	height = lower - upper
 	if width > height:
@@ -132,7 +134,9 @@ def crop_resize(img, dimension):
 
 	img = img.crop((left, upper, right, lower))
 
-	return img.resize((dimension, dimension), Image.BICUBIC)
+	# Image.LANCZOS
+	# Image.BICUBIC
+	return img.resize((dimension, dimension), Image.LANCZOS)
 
 
 # pulls together all the methods to distort and finalise the image
@@ -160,13 +164,16 @@ rotation_range = 45
 # image will be cropped/resized to training_dimensionx x training_dimension
 training_dimension = 32  # requires 1024 inputs in neural net
 
+# number of images fro Zener symbol
+generated_symbols = 10
+
 # load the images
 images = fetch_symbol_images()
 
 for symbol_name in images:
 	symbol_img = images[symbol_name]
 	adjusted_img = adjust_canvas(symbol_img, size_factor)
-	for variant in range(1, 10):
+	for variant in range(1, generated_symbols + 1):
 		deformed_image = distort_image(adjusted_img, size_factor, rotation_range, training_dimension)
 		generated_folder = '../generated/' + symbol_name + "/"
 		if not os.path.exists(generated_folder):
