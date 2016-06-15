@@ -12,7 +12,12 @@ The experimenter would choose a card from a pack of 25, which contained five set
 
 I hope the parallel with machine learning classification is obvious and in this repo I will attempt to train a Torch7 based neural net (non-convolutional) running on a Jetson TK1 to properly classify Zener Cards.
 
-### Prerequisites
+## Goal
+The point of this project - besides teaching me machine learning - is to produce a neural net that can recognise any of the Zener symbols whether that input comes from a high-quality photoshop rendering or a badly-lit phone camera shot of a crudely-drawn Zener symbol.
+
+This will probably not be achieved with such a simple network...
+
+## Prerequisites
 You will need to have Python 2.7 installed. Earlier versions *may* work, but that is what I have installed, so. Also you'll need to install [Pillow](https://pillow.readthedocs.io/en/3.0.0/installation.html) for loading and mucking about with image files.
 
 ## Test data
@@ -20,11 +25,11 @@ We will attempt to generate a large data set starting only with the symbols take
 To achieve this I will use Python to distort, scale and transpose the initial data.
 It is likely I will add more starting data to the examples, but for now these will suffice as it is a simple neural net the risk of over-fitting is somewhat lower.
 
-### Data expansion
+### Data augmentation
 After a cursory search I couldn't find any tools that would help me generate extra data from an existing data set. The first part of this project will require the creation of some Python scripts to fold, spindle and mutilate the starting data set.
 
 #### The symbols after distortion
-Below you can see an example of what the data expansion script generates. I think these look pretty good for a start. The script currently applies a perspective distortion and then rotates the image. I may add some other type of distortion - pincushion, skew or whatever, but we'll see what the training evaluation tells us.
+Below you can see an example of what the data expansion script generates. I think these look pretty good for a start. The script currently applies a perspective distortion and then rotates the image before cropping it down to the symbol and resizing the image to the chosen 32 x 32 pixel data sample size.
 
 ![Circle](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/circle7.png)
 ![Cross](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/cross1.png)
@@ -32,10 +37,32 @@ Below you can see an example of what the data expansion script generates. I thin
 ![Square](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/square6.png)
 ![Star](https://github.com/mlennox/1-tk1-torch-zener-learner/blob/master/content/star8.png)
 
+#### Additional work
+I may add some other type of distortion - pincushion, skew or whatever, but we'll see what the training evaluation tells us.
+
+An obvious enhancement would be to use a larger set of starting images. It would be straight-forward enough to find (creative commons of course!) images of Zener cards, and even add some hand-drawn versions. 
+
+Another simple augmentation is to add colour to the training examples, overlay with a vignette, and add random patterns to the background of each training image.
+
 ### Data format
+When the training images have been generated we need to load them in a way that makes sense. 
+
+This seems to 
+
 I will discover what the data format should be as I progress in building out this network. I'll update this section as I know more.
 
-## Training
+## The network
+### Construction
+This will be a simple neural network with two hidden layers and five output nodes, one for each of the 'categories' we are going to train the network to classify - circle, cross, wavy lines, square, star.
+
+We'll use a [Rectified Linear unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) instead of a more standard Sigmoid. There are two reasons for this - I hear they are faster and also less prone to vanishing gradient. The latter is not such a problem with such a simple network, but any help I get to increase the learning rate and avoid getting stuck in a local minimum, I'll take.
+
+The output layer will use the [Softmax function](https://en.wikipedia.org/wiki/Softmax_function) to produce a set of probabilities on the output nodes. The softmax function just normalises the outputs so that all the probabilities add up to 1. 
+
+### Training
+We will use Stochastic Gradient Descent to train the network. We'll use a batch size of 32 so ech training epoch will take 32 steps to complete.
+
+
 
 ### Metrics
 While training the network it will be imperative to know how the training is going - does the learning rate need tweaking? Is the network overfitting? Is it training quickly enough?
