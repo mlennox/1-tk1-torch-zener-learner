@@ -44,12 +44,49 @@ An obvious enhancement would be to use a larger set of starting images. It would
 
 Another simple augmentation is to add colour to the training examples, overlay with a vignette, and add random patterns to the background of each training image.
 
-### Data format
-When the training images have been generated we need to load them in a way that makes sense. 
+### Loading Data
 
-This seems to 
+**Tensors**
 
-I will discover what the data format should be as I progress in building out this network. I'll update this section as I know more.
+Tensors are provided by Torch7 and are essentially matrices. This of course glosses over the details of how they are something like a structured 'view' composed over a Lua Storage instance with a defined stride - which adds nothing to how we will use it.
+
+**Practical usage**
+
+In your command prompt, type 'th' to enter the torch/lua repl
+
+We can define a Tensor simply:
+
+    trainData = Torch.Tensor()
+    
+Which generates an empty Tensor with no dimensions - not very useful. We can however resize the Tensor
+
+    trainData:resize(3,4) // 3 rows by 4 columns matrix 
+
+For loading images we would normally define a Tensor as below
+
+    trainData = Torch.Tensor(num_img, channels, y_dim, x_dim)
+    
+'Channels' refers to the colour channels and is normally either 1, for greyscale or 3, for RGB or YUV.
+    
+We'll be attempting to use ':resize()' to add each new image to an existing for which we'll need the size of the Tensor. 
+ 
+    trainData:size()
+    --      num_img
+    --      channels
+    --      y_dim
+    --      x_dim
+
+Each dimension can be accessed as an array
+
+    d = trainData:size()
+    d[1] = num_img
+    
+So we should be able to append a new image like so
+
+    trainData:resize(d1+1, channels, y_dim, x_dim)
+
+
+
 
 ## The network
 ### Construction
