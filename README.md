@@ -1,3 +1,6 @@
+# OBSOLETE
+This repo has been superseded by a [Python/Theano based project](https://github.com/mlennox/1-tk1-zener-learner)
+
 # Zener learner
 Simple neural net to classify zener cards. Tutorial 1 in a series of some.
 
